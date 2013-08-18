@@ -42,7 +42,9 @@ module.exports = function(grunt) {
           host: 'example.com'
         },
         urls: [
-          'folder/picture.jpg'
+          'folder/picture1.jpg',
+          'folder/picture2.jpg',
+          'folder/picture3.jpg'
         ]
       }
     },

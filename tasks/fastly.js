@@ -24,23 +24,31 @@ module.exports = function(grunt) {
       concurrentPurges: 10
     });
 
+    if (typeof options.key === 'undefined') {
+      grunt.fail.fatal('Fastly api key is required.');
+    }
+
     fastly.authenticate(options.key);
 
     // Purge all cache from a service
     if (options.purgeAll) {
       if (typeof options.serviceId === 'undefined') {
-        grunt.log.error('A serviceId must be provided when purging all cache.');
-        return false
+        grunt.fail.fatal('A serviceId must be provided when purging all cache.');
       }
 
-      fastly.purgeAll(options.serviceId, done);
+      grunt.log.write('PurgeAll from "'+options.serviceId+'"...');
+      fastly.purgeAll(options.serviceId, function(err) {
+        if (err) grunt.log.error();
+        else grunt.log.ok();
+
+        done();
+      });
       return
     }
 
     // Purge only specific urls
     if (typeof options.host === 'undefined') {
-      grunt.log.error('If purging specific urls, a host must be provided.');
-      return false
+      grunt.fail.fatal('If purging specific urls, a host must be provided.');
     }
 
     if (typeof this.data.urls === 'undefined') {
@@ -48,7 +56,13 @@ module.exports = function(grunt) {
     }
 
     async.eachLimit(this.data.urls, options.concurrentPurges, function(url, next) {
-      fastly.purge(options.host, url, next);
+      grunt.log.write('Purging "'+options.host+'/'+url+'"...');
+      fastly.purge(options.host, url, function(err) {
+        if (err) grunt.log.error();
+        else grunt.log.ok();
+
+        next();
+      });
     }, done);
   });
 };
