@@ -29,8 +29,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     fastly: {
       options: {
-        key: 'abc',
-        domain: 'example.com'
+        key: 'abc'
       },
       purgeAll: {
         options: {

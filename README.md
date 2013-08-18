@@ -37,46 +37,65 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.key
 Type: `String`
-Default value: `',  '`
 
-A string value that is used to do something with whatever.
+Your API key from Fastly.
 
-#### options.punctuation
+#### options.host
 Type: `String`
-Default value: `'.'`
 
-A string value that is used to do something else with whatever else.
+The host you wish to purge from when purging individual files.
+
+#### options.purgeAll
+Type: `Boolean`
+Default value: `false`
+
+Purge all cached files from a cache. If this value is true, a serice id must also be provided.
+
+#### options.serviceId
+Type: `String`
+
+The service you wish to purge all the files from. Only required when option `purgeAll` is `true`.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  fastly: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Purge All
+In this example, all cached files will be purged from the production service.
 
 ```js
 grunt.initConfig({
   fastly: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      key: 'your api key'
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    production: {
+      options: {
+        purgeAll: true,
+        serviceId: 'production service id from Fastly'
+      }
+    }
+  },
+})
+```
+
+#### Purge selected files
+In this example, we'll purge only selected files from the example.com host.
+
+```js
+grunt.initConfig({
+  fastly: {
+    options: {
+      key: 'your api key'
+    },
+    example: {
+      options: {
+        host: 'example.com',
+        urls: [
+          'path/to/asset1.jpg',
+          'path/to/asset2.jpg'
+        ]
+      }
     },
   },
 })
