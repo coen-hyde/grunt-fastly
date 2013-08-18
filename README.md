@@ -58,6 +58,12 @@ Type: `String`
 
 The service you wish to purge all the files from. Only required when option `purgeAll` is `true`.
 
+#### options.concurrentPurges
+Type: `Number`
+Default value: `10`
+
+The number of concurrent purges allowed at any one time.
+
 ### Usage Examples
 
 #### Purge All
