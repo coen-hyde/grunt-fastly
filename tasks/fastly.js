@@ -9,7 +9,8 @@
 'use strict';
 
 var fastly = require('fastly')
-  , async = require('async');
+  , async = require('async')
+  , url = require('url');
 
 module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
@@ -55,9 +56,11 @@ module.exports = function(grunt) {
       this.data.urls = [];
     }
 
-    async.eachLimit(this.data.urls, options.concurrentPurges, function(url, next) {
-      grunt.log.write('Purging "'+options.host+'/'+url+'"...');
-      fastly.purge(options.host, url, function(err) {
+    async.eachLimit(this.data.urls, options.concurrentPurges, function(uriPath, next) {
+      var uri = url.format({host: options.host, pathname: uriPath}).substr(2);
+
+      grunt.log.write('Purging "'+uri+'"...');
+      fastly.purge(options.host, uriPath, function(err) {
         if (err) grunt.log.error();
         else grunt.log.ok();
 
