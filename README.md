@@ -1,6 +1,8 @@
 # grunt-fastly
 
-> A Grunt plugin to purge cache from Fastly
+A Grunt plugin to purge cache from Fastly
+
+[![NPM](https://nodei.co/npm/grunt-fastly.png)](https://nodei.co/npm/grunt-fastly/)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
