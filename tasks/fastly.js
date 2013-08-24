@@ -59,10 +59,9 @@ module.exports = function(grunt) {
     async.eachLimit(this.data.urls, options.concurrentPurges, function(uriPath, next) {
       var uri = url.format({host: options.host, pathname: uriPath}).substr(2);
 
-      grunt.log.write('Purging "'+uri+'"...');
       fastly.purge(options.host, uriPath, function(err) {
         if (err) grunt.log.error();
-        else grunt.log.ok();
+        else grunt.log.writeln('Purged: '+uri);
 
         next();
       });
