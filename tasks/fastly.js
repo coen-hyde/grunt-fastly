@@ -52,11 +52,11 @@ module.exports = function(grunt) {
       grunt.fail.fatal('If purging specific urls, a host must be provided.');
     }
 
-    if (typeof this.data.urls === 'undefined') {
-      this.data.urls = [];
+    if (typeof options.urls === 'undefined') {
+      options.urls = [];
     }
 
-    async.eachLimit(this.data.urls, options.concurrentPurges, function(uriPath, next) {
+    async.eachLimit(options.urls, options.concurrentPurges, function(uriPath, next) {
       var uri = url.format({host: options.host, pathname: uriPath}).substr(2);
 
       fastly.purge(options.host, uriPath, function(err) {
