@@ -39,7 +39,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "fastly": "~0.1.2",
+    "fastly": "~1.2.1",
     "async": "~0.2.9"
   }
 }

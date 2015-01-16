@@ -29,7 +29,7 @@ module.exports = function(grunt) {
       grunt.fail.fatal('Fastly api key is required.');
     }
 
-    fastly.authenticate(options.key);
+    fastly = fastly(options.key);
 
     // Purge all cache from a service
     if (options.purgeAll) {
