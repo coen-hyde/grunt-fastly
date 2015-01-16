@@ -100,8 +100,8 @@ grunt.initConfig({
       options: {
         host: 'example.com',
         urls: [
-          'path/to/asset1.jpg',
-          'path/to/asset2.jpg'
+          '/path/to/asset1.jpg',
+          '/path/to/asset2.jpg'
         ]
       }
     },
