@@ -37,6 +37,12 @@ module.exports = function(grunt) {
           serviceId: 'service id'
         }
       },
+      purgeKey: {
+        options: {
+          purgeKey: 'surrogate-key',
+          serviceId: 'service id'
+        }
+      },
       purgeFiles: {
         options: {
           host: 'example.com'
@@ -77,6 +83,7 @@ module.exports = function(grunt) {
     }
 
     fastly.purgeAll = mocker('purgeAll');
+    fastly.purgeKey = mocker('purgeKey');
     fastly.purge = mocker('purge');
   });
 
