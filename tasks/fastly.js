@@ -47,6 +47,22 @@ module.exports = function(grunt) {
       return
     }
 
+    // Purge content matching key
+    if (options.purgeKey) {
+      if (typeof options.serviceId === 'undefined') {
+        grunt.fail.fatal('A serviceId must be provided when purging all cache.');
+      }
+
+      grunt.log.write('Purging Key "'+options.purgeKey+'" from "'+options.serviceId+'"...');
+      fastly.purgeKey(options.serviceId, options.purgeKey, function(err) {
+        if (err) grunt.log.error();
+        else grunt.log.ok();
+
+        done();
+      });
+      return
+    }
+
     // Purge only specific urls
     if (typeof options.host === 'undefined') {
       grunt.fail.fatal('If purging specific urls, a host must be provided.');

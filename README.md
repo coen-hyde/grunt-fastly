@@ -55,6 +55,11 @@ Default value: `false`
 
 Purge all cached files from a cache. If this value is true, a serice id must also be provided.
 
+#### options.purgeKey
+Type: `String`
+
+The key you wish to purge from a cache.
+
 #### options.serviceId
 Type: `String`
 
@@ -80,6 +85,25 @@ grunt.initConfig({
     production: {
       options: {
         purgeAll: true,
+        serviceId: 'production service id from Fastly'
+      }
+    }
+  },
+})
+```
+
+#### Purge Key
+In this example, all cached files associated with the key will be purged from the production service.
+
+```js
+grunt.initConfig({
+  fastly: {
+    options: {
+      key: 'your api key'
+    },
+    production: {
+      options: {
+        purgeKey: 'surrogate-key',
         serviceId: 'production service id from Fastly'
       }
     }
