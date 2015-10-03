@@ -8,15 +8,15 @@
 
 'use strict';
 
-var fastly = require('fastly')
-  , async = require('async')
-  , url = require('url');
+var fastly = require('fastly'),
+    async = require('async'),
+    url = require('url');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('fastly', 'A Grunt plugin to purge cache from Fastly', function() {
+  grunt.registerMultiTask('fastly', 'A Grunt plugin to purge cache from Fastly', function () {
     var done = this.async();
 
     // Merge task-specific and/or target-specific options with these defaults.
@@ -37,14 +37,19 @@ module.exports = function(grunt) {
         grunt.fail.fatal('A serviceId must be provided when purging all cache.');
       }
 
-      grunt.log.write('PurgeAll from "'+options.serviceId+'"...');
-      fastly.purgeAll(options.serviceId, function(err) {
-        if (err) grunt.log.error();
-        else grunt.log.ok();
+      grunt.log.write('PurgeAll from "' + options.serviceId + '"...');
+
+      fastly.purgeAll(options.serviceId, function (err) {
+        if (err) {
+          grunt.log.error();
+        } else {
+          grunt.log.ok();
+        }
 
         done();
       });
-      return
+
+      return;
     }
 
     // Purge content matching key
@@ -53,14 +58,19 @@ module.exports = function(grunt) {
         grunt.fail.fatal('A serviceId must be provided when purging all cache.');
       }
 
-      grunt.log.write('Purging Key "'+options.purgeKey+'" from "'+options.serviceId+'"...');
-      fastly.purgeKey(options.serviceId, options.purgeKey, function(err) {
-        if (err) grunt.log.error();
-        else grunt.log.ok();
+      grunt.log.write('Purging Key "' + options.purgeKey + '" from "' + options.serviceId + '"...');
+
+      fastly.purgeKey(options.serviceId, options.purgeKey, function (err) {
+        if (err) {
+          grunt.log.error();
+        } else {
+          grunt.log.ok();
+        }
 
         done();
       });
-      return
+
+      return;
     }
 
     // Purge only specific urls
@@ -72,15 +82,24 @@ module.exports = function(grunt) {
       options.urls = [];
     }
 
-    async.eachLimit(options.urls, options.concurrentPurges, function(uriPath, next) {
-      var uri = url.format({host: options.host, pathname: uriPath}).substr(2);
+    async.eachLimit(options.urls, options.concurrentPurges, function (uriPath, next) {
 
-      fastly.purge(options.host, uriPath, function(err) {
-        if (err) grunt.log.error();
-        else grunt.log.writeln('Purged: '+uri);
+      var uri = url.format({
+        host: options.host,
+        pathname: uriPath
+      }).substr(2);
+
+      fastly.purge(options.host, uriPath, function (err) {
+        if (err) {
+          grunt.log.error();
+        } else {
+          grunt.log.writeln('Purged: ' + uri);
+        }
 
         next();
       });
+
     }, done);
+
   });
 };

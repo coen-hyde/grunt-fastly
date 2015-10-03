@@ -68,19 +68,22 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  grunt.registerTask('mock-fastly', function() {
-    var mocker = function(fnName) {
-      return function() {
+  grunt.registerTask('mock-fastly', function () {
+    var mocker = function (fnName) {
+      return function () {
         if (typeof this.calls === 'undefined') {
           this.calls = [];
         }
 
-        this.calls.push({method: fnName, arguments: arguments});
+        this.calls.push({
+          method: fnName,
+          arguments: arguments
+        });
 
         // Call the call back
         _.last(arguments)();
-      }
-    }
+      };
+    };
 
     fastly.purgeAll = mocker('purgeAll');
     fastly.purgeKey = mocker('purgeKey');
@@ -89,9 +92,16 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['mock-fastly', 'fastly', 'nodeunit']);
+  grunt.registerTask('test', [
+    'mock-fastly',
+    'fastly',
+    'nodeunit'
+  ]);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', [
+    'jshint',
+    'test'
+  ]);
 
 };
