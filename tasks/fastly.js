@@ -1,45 +1,33 @@
-/*
- * grunt-fastly
- * https://github.com/coen-hyde/grunt-fastly
- *
- * Copyright (c) 2013 Coen Hyde
- * Licensed under the MIT license.
- */
-
-'use strict';
-
-var fastly = require('fastly'),
-    async = require('async'),
-    url = require('url');
+const async = require('async');
+const url = require('url');
 
 module.exports = function (grunt) {
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('fastly', 'A Grunt plugin to purge cache from Fastly', function () {
-    var done = this.async();
 
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
+    let fastly = require('fastly');
+    let done = this.async();
+
+    const options = this.options({
       purgeAll: false,
       concurrentPurges: 10
     });
 
-    if (typeof options.key === 'undefined') {
-      grunt.fail.fatal('Fastly api key is required.');
+    if (!options.key) {
+      grunt.fail.fatal('Fastly API key is required.');
     }
 
     fastly = fastly(options.key);
 
     // Purge all cache from a service
     if (options.purgeAll) {
-      if (typeof options.serviceId === 'undefined') {
+      if (!options.serviceId) {
         grunt.fail.fatal('A serviceId must be provided when purging all cache.');
       }
 
-      grunt.log.write('PurgeAll from "' + options.serviceId + '"...');
+      grunt.log.write(`PurgeAll from ${options.serviceId}…`);
 
-      fastly.purgeAll(options.serviceId, function (err) {
+      fastly.purgeAll(options.serviceId, (err) => {
         if (err) {
           grunt.log.error();
         } else {
@@ -54,13 +42,13 @@ module.exports = function (grunt) {
 
     // Purge content matching key
     if (options.purgeKey) {
-      if (typeof options.serviceId === 'undefined') {
-        grunt.fail.fatal('A serviceId must be provided when purging all cache.');
+      if (!options.serviceId) {
+        grunt.fail.fatal('A serviceId must be provided when purging surrogate keys.');
       }
 
-      grunt.log.write('Purging Key "' + options.purgeKey + '" from "' + options.serviceId + '"...');
+      grunt.log.write(`Purging Key ${options.purgeKey} from ${options.serviceId}…`);
 
-      fastly.purgeKey(options.serviceId, options.purgeKey, function (err) {
+      fastly.purgeKey(options.serviceId, options.purgeKey, (err) => {
         if (err) {
           grunt.log.error();
         } else {
@@ -74,29 +62,29 @@ module.exports = function (grunt) {
     }
 
     // Purge only specific urls
-    if (typeof options.host === 'undefined') {
+    if (!options.host) {
       grunt.fail.fatal('If purging specific urls, a host must be provided.');
     }
 
-    if (typeof options.urls === 'undefined') {
+    if (!options.urls) {
       options.urls = [];
     }
 
-    async.eachLimit(options.urls, options.concurrentPurges, function (uriPath, next) {
+    async.eachLimit(options.urls, options.concurrentPurges, (path, callback) => {
 
-      var uri = url.format({
+      const uri = url.format({
         host: options.host,
-        pathname: uriPath
-      }).substr(2);
+        pathname: path
+      });
 
-      fastly.purge(options.host, uriPath, function (err) {
+      fastly.purge(options.host, path, (err) => {
         if (err) {
           grunt.log.error();
         } else {
-          grunt.log.writeln('Purged: ' + uri);
+          grunt.log.writeln(`Purged: ${uri}`);
         }
 
-        next();
+        callback();
       });
 
     }, done);

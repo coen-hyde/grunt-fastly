@@ -5,7 +5,7 @@ A Grunt plugin to purge cache from Fastly
 [![NPM](https://nodei.co/npm/grunt-fastly.png)](https://nodei.co/npm/grunt-fastly/)
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `^1.0.1`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -63,7 +63,7 @@ The key you wish to purge from a cache.
 #### options.serviceId
 Type: `String`
 
-The service you wish to purge all the files from. Only required when option `purgeAll` is `true`.
+The service you wish to purge all the files from. Only required when option `purgeAll` is `true` or purging surrogate keys.
 
 #### options.concurrentPurges
 Type: `Number`
@@ -135,6 +135,3 @@ grunt.initConfig({
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_

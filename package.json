@@ -28,19 +28,17 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-jshint": "~0.11.3",
-    "grunt": "~0.4.1"
-  },
-  "peerDependencies": {
-    "grunt": ">=0.4.0"
+    "grunt": "^1.0.1",
+    "grunt-eslint": "^19.0.0"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "fastly",
+    "cdn",
+    "purge"
   ],
   "dependencies": {
-    "fastly": "~1.2.1",
-    "async": "~0.2.9"
+    "async": "^2.1.4",
+    "fastly": "^1.2.1"
   }
 }

@@ -1,9 +1,0 @@
-{
-  "immed": true,
-  "latedef": true,
-  "newcap": true,
-  "sub": true,
-  "boss": true,
-  "eqnull": true,
-  "node": true
-}
