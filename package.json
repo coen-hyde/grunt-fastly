@@ -1,7 +1,7 @@
 {
   "name": "grunt-fastly",
   "description": "A Grunt plugin to purge cache from Fastly",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "homepage": "https://github.com/coen-hyde/grunt-fastly",
   "author": {
     "name": "Coen Hyde",
