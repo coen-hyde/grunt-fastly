@@ -39,6 +39,6 @@
   ],
   "dependencies": {
     "async": "^2.1.4",
-    "fastly": "^1.2.1"
+    "fastly": "^2.0.0"
   }
 }

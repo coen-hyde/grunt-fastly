@@ -315,8 +315,8 @@ escope@^3.6.0:
     estraverse "^4.1.1"
 
 eslint@^3.0.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.11.0.tgz#41d34f8b3e69949beee5c097ff4e75ad13ba2d00"
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.11.1.tgz#408be581041385cba947cd8d1cd2227782b55dbf"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
@@ -406,9 +406,9 @@ fast-levenshtein@~2.0.4:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.5.tgz#bd33145744519ab1c36c3ee9f31f08e9079b67f2"
 
-fastly@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/fastly/-/fastly-1.2.1.tgz#dc1a989fe26d60f64d6f107b41af01d122ef17fa"
+fastly@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/fastly/-/fastly-2.0.0.tgz#bf49356ce944ef821f66c5cfefe4d3a08494c631"
   dependencies:
     request "~2.12.0"
 
@@ -887,8 +887,8 @@ optionator@^0.8.2:
     wordwrap "~1.0.0"
 
 os-homedir@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/os-homedir/-/os-homedir-1.0.1.tgz#0d62bdf44b916fd3bbdcf2cab191948fb094f007"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/os-homedir/-/os-homedir-1.0.2.tgz#ffbc4988336e0e833de0c168c7ef152121aa7fb3"
 
 parse-json@^2.2.0:
   version "2.2.0"
